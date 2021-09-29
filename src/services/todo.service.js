@@ -26,3 +26,14 @@ exports.getAllTodoService = (req, res) => {
         })
     })
 }
+
+exports.getTodoByIdService = (req, res) => {
+    return new Promise((resolve, reject) => {
+        const selectQuery = `select * from todo_list where id='${req.params.id}'`
+        pool.query(selectQuery, (error, response) => {
+            if (error) { reject({ message: 'something went wrong', error }) }
+            else if (response.length == 0) { reject({ message: 'no record found' }) }
+            else { resolve({ response }) }
+        })
+    })
+}
