@@ -41,9 +41,9 @@ exports.loginService = (req, res) => {
                 reject({ message: "something went wrong", error })
             }
             else if (response.length > 0) {
-                const { first_name, last_name, role, hash_password, is_active } = response[0]
+                const { id, first_name, last_name, role, hash_password, is_active } = response[0]
                 if (await bcrypt.compare(password, hash_password)) {
-                    const token = jwt.sign({ first_name, last_name, email, is_active, role }, process.env.JWT_SECRET)
+                    const token = jwt.sign({ id, first_name, last_name, email, is_active, role }, process.env.JWT_SECRET)
                     resolve({ message: 'successfully logged in...', token })
                 } else {
                     reject({ message: 'Invalid password' })
