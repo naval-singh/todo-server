@@ -11,7 +11,17 @@ exports.addNewTodoService = (req, res) => {
         }
         const insertQuery = 'insert into todo_list set ?'
         pool.query(insertQuery, body, (error, response) => {
-            if (error) { reject({ error }) }
+            if (error) { reject({ message: 'something went wrong', error }) }
+            else { resolve({ response }) }
+        })
+    })
+}
+
+exports.getAllTodoService = (req, res) => {
+    return new Promise((resolve, reject) => {
+        const selectQuery = 'select * from todo_list'
+        pool.query(selectQuery, (error, response) => {
+            if (error) { reject({ message: 'something went wrong', error }) }
             else { resolve({ response }) }
         })
     })

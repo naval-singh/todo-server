@@ -10,7 +10,7 @@ exports.signupService = (req, res) => {
         const hash_password = await bcrypt.hash(password, 10)
         const body = { ...req.body, hash_password, is_active }
         const searchQuery = `select * from users where email='${email}'`
-        
+
         if (role.toLowerCase() === 'user') { is_active = true }
 
         pool.query(searchQuery, (error, response) => {
@@ -22,7 +22,7 @@ exports.signupService = (req, res) => {
             } else {
                 const insertQuery = 'insert into users set ?'
                 pool.query(insertQuery, body, (error, response) => {
-                    if (error) { reject({ error }) }
+                    if (error) { reject({ message: 'something went wrong', error }) }
                     else { resolve({ response }) }
                 })
             }
