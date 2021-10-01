@@ -4,7 +4,7 @@ All the apis are listed here, divided into two parts:
 
 ## Auth apis
 
-### `https://naval-todo-server.herokuapp.com/api/login`
+### `POST : ` `https://naval-todo-server.herokuapp.com/api/login`
 
 ### `https://naval-todo-server.herokuapp.com/api/signup`
 
