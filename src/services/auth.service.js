@@ -44,11 +44,10 @@ exports.loginService = (req, res) => {
                 if (await bcrypt.compare(password, hash_password)) {
                     if (is_active == 1) {
                         const token = jwt.sign({ id, first_name, last_name, email, is_active, role }, process.env.JWT_SECRET)
-                        resolve({ message: 'successfully logged in...', token })
+                        resolve({ message: 'successfully logged in...', token, userDetails: response[0] })
                     } else {
                         reject({ message: 'Please activate your account before login' })
                     }
-
                 } else {
                     reject({ message: 'Invalid password' })
                 }

@@ -21,8 +21,8 @@ exports.getTodoById = (req, res) => {
 }
 
 exports.updateTodo = (req, res) => {
-    const { title, isCompleted } = req.body
-    if (!title || !isCompleted) { return res.status(400).json({ message: 'all field required' }) }
+    const { title } = req.body
+    if (!title) { return res.status(400).json({ message: 'all field required' }) }
     updateTodoService(req, res)
         .then(response => res.status(200).json({ response }))
         .catch(error => res.status(400).json({ error }))
